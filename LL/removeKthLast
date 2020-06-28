@@ -1,0 +1,38 @@
+/*
+The structure of linked list is the following
+
+struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};
+*/
+
+ // By Recursion
+int removeKLast( Node *head, int k) 
+{
+ if(head==NULL) return 0;
+ int count = removeKLast(head->next,k)+1;
+ if(count==k) return head->data;
+ return count;
+}
+
+ // By Iteration
+int removeKLast( Node *head, int k) 
+{
+ if(head==NULL) return 0;
+ Node* curr=head;
+ while(k>0 && curr!=NULL){
+	curr = curr->next;
+	k--;
+ }
+ Node* sec=head;
+ while(curr!=NULL){
+	sec = sec->next;
+	curr = curr->next;
+ }
+ return sec->data;
+}
